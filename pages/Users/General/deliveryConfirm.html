@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AML | Confirm Pick Up</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <div>
+      <h1>
+        Confirm about borrowing <span id="mediaName"></span> from
+        <span id="branchName"></span>
+      </h1>
+      <form action="" id="deliveryForm">
+        <div id="delivery-date-container">
+          <label for="delivery-date">Select delivery date:</label>
+          <input type="date" id="delivery-date" min="" />
+        </div>
+        <div id="deliveryAddress">
+          <label for="streetLine1">Street Line 1:</label>
+          <input type="text" onchange="" name="streetLine1" id="streetLine1" />
+
+          <label for="streetLine2">Street Line 2:</label>
+          <input type="text" name="streetLine2" id="streetLine2" />
+
+          <label for="city">City:</label>
+          <input type="text" name="city" id="city" />
+
+          <label for="country">Country:</label>
+          <input type="text" name="country" id="country" />
+
+          <label for="postcode">Postcode:</label>
+          <input type="text" name="postcode" id="postcode" />
+        </div>
+        <button type="submit" id="submitDelivery">Submit</button>
+      </form>
+      <p>Collect at: <span id="mediaAddress"></span></p>
+      <p>Due date: <span id="dueDate"></span></p>
+      <script type="module" src="deliveryConfirm.js"></script>
+    </div>
+  </body>
+</html>

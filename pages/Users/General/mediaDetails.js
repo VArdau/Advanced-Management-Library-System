@@ -4,7 +4,7 @@ import {
   ref,
   get,
   set,
-} from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js"; //9.21.0
+} from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -34,6 +34,7 @@ const librariesInfo = document.getElementById("libraries-info");
 const cityInput = document.getElementById("availability-two");
 const townsList = document.getElementById("towns-list");
 const mediaNameElement = document.getElementById("media-name");
+
 const branchSelect = document.getElementById("branch-select");
 const pickupOptions = document.getElementById("pickup-options");
 const pickupFormMediaIdField = document.getElementById(
@@ -45,20 +46,41 @@ const pickupFormMediaNameField = document.getElementById(
 const pickupFormBranchNameField = document.getElementById(
   "pickupFormBranchNameField"
 );
+const deliveryFormMediaIdField = document.getElementById(
+  "deliveryFormMediaIdField"
+);
+const deliveryFormMediaNameField = document.getElementById(
+  "deliveryFormMediaNameField"
+);
+const deliveryFormBranchNameField = document.getElementById(
+  "deliveryFormBranchNameField"
+);
 
 function initializeMediaValues() {
   const mediaRef = ref(database, "media");
 
+  const urlString = window.location.href;
+  const url = new URL(urlString);
+  var mediaId = url.searchParams.get("MediaId");
+  var firstMedia = null; // to get a specific media
   get(mediaRef)
     .then((snapshot) => {
       if (snapshot.exists()) {
-        const mediaArray = snapshot.val();
+        var mediaArray = snapshot.val();
         if (mediaArray && mediaArray.length > 0) {
-          const firstMedia = mediaArray[2]; // to get a specific media
+          if (!mediaId) {
+            firstMedia = mediaArray[2];
+          } else {
+            var mediaIdToInt = Number(mediaId);
+            firstMedia = mediaArray[mediaIdToInt - 1]; //media id is 3 but the index is 2, the index starts from zero, but the media ids start from 1
+          }
+
           selectedMediaID = firstMedia.MediaID || "No ID available";
           selectedMediaName = firstMedia.MediaName || "No Name available";
           pickupFormMediaIdField.value = selectedMediaID;
           pickupFormMediaNameField.value = selectedMediaName;
+          deliveryFormMediaIdField.value = selectedMediaID;
+          deliveryFormMediaNameField.value = selectedMediaName;
 
           const coverURL = firstMedia.CoverURL || "";
 
@@ -246,12 +268,14 @@ document.getElementById("selected-branch").addEventListener("click", () => {
     overlay.style.display = "none";
 
     pickupFormBranchNameField.value = selectedBranchName;
+    deliveryFormBranchNameField.value = selectedBranchName;
   } else {
     console.warn("No branch selected.");
     selectedBranchBorrowLabel.textContent = "Haven't selected a branch yet";
     selectedBranchBorrowLabel.style.color = "red";
   }
 });
+const pickupForm = document.getElementById("pickupForm");
 
 // for the mediaquantity to be -1 every time
 /*const pickupButton = document.getElementById("pickup-button");
@@ -325,7 +349,7 @@ pickupButton.addEventListener("click", () => {
 }); */
 
 // same as pickup, but would also need to do address
-const submitDeliveryButton = document.getElementById("submitDelivery");
+/*const submitDeliveryButton = document.getElementById("submitDelivery");
 
 submitDeliveryButton.addEventListener("click", (event) => {
   event.preventDefault();
@@ -394,7 +418,7 @@ submitDeliveryButton.addEventListener("click", (event) => {
     .catch((error) => {
       console.error("Error accessing media data:", error);
     });
-});
+});*/
 
 // initialize the app
 loadCities();

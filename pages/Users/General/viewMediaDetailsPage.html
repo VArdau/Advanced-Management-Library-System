@@ -171,33 +171,37 @@
 
                 <button type="submit" id="pickup-button">Pick up</button>
               </form>
-              <form action="">
-                <button type="button" id="delivery-button">Delivery</button>
+              <form id="deliveryForm" action="deliveryConfirm.html">
+                <input
+                  id="deliveryFormMediaIdField"
+                  value=""
+                  name="mediaId"
+                  type="text"
+                  hidden="true"
+                />
+                <input
+                  id="deliveryFormMediaNameField"
+                  value=""
+                  name="mediaName"
+                  type="text"
+                  hidden="true"
+                />
+                <input
+                  value="Vicky"
+                  name="userName"
+                  type="text"
+                  hidden="true"
+                />
+                <input
+                  id="deliveryFormBranchNameField"
+                  value=""
+                  name="branchName"
+                  type="text"
+                  hidden="true"
+                />
+
+                <button type="submit" id="delivery-button">Delivery</button>
               </form>
-            </div>
-            <div id="deliveryAddress" style="display: none">
-              <label for="streetLine1">Street Line 1:</label>
-              <input
-                type="text"
-                onchange=""
-                name="streetLine1"
-                id="streetLine1"
-              />
-
-              <label for="streetLine2">Street Line 2:</label>
-              <input type="text" name="streetLine2" id="streetLine2" />
-
-              <label for="city">City:</label>
-              <input type="text" name="city" id="city" />
-
-              <label for="country">Country:</label>
-              <input type="text" name="country" id="country" />
-
-              <label for="postcode">Postcode:</label>
-              <input type="text" name="postcode" id="postcode" />
-              <div id="submitDelivery">
-                <button id="submitDelivery-button">Submit</button>
-              </div>
             </div>
             <div class="close-button-container">
               <button class="close-button" onclick="closeBorrow()">
@@ -210,7 +214,6 @@
     </div>
     <script src="viewMediaDetails.js"></script>
     <script type="module" src="mediaDetails.js"></script>
-    <script type="module" src="borrowMedia.js"></script>
     <!--wont work-->>
   </body>
 </html>

@@ -1,8 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
 import {
   getFirestore,
-  //doc,
-  //setDoc,
   collection,
   addDoc,
 } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
@@ -36,8 +34,6 @@ const mn = document.getElementById("mediaName");
 const bn = document.getElementById("mediaAddress");
 const ad = document.getElementById("branchName");
 
-//mediaName = mn.innerHTML;
-
 settingValues();
 
 function settingValues() {
@@ -46,12 +42,12 @@ function settingValues() {
   ad.innerHTML = branchName;
 }
 
-const pickupDateInput = document.getElementById("pickup-date");
+const deliveryDateInput = document.getElementById("delivery-date");
 const today = new Date();
 const formattedDate = today.toISOString().split("T")[0];
-pickupDateInput.value = formattedDate;
-pickupDateInput.min = formattedDate;
-dateToBorrow = pickupDateInput.value;
+deliveryDateInput.value = formattedDate;
+deliveryDateInput.min = formattedDate;
+dateToBorrow = deliveryDateInput.value;
 
 var dateToBorrowDateTime = new Date(dateToBorrow);
 var dueDateDateTime = dateToBorrowDateTime.setDate(
@@ -62,19 +58,30 @@ const dueDateElement = document.getElementById("dueDate");
 dueDateElement.innerHTML = dueDate;
 
 document
-  .getElementById("submitPickup")
-  .addEventListener("click", async (event) => {
+  .getElementById("deliveryForm")
+  .addEventListener("submit", async (event) => {
     event.preventDefault();
+
+    var streetline1 = event.target.elements[1].value;
+    var streetline2 = event.target.elements[2].value;
+    var city = event.target.elements[3].value;
+    var country = event.target.elements[4].value;
+    var postcode = event.target.elements[5].value;
+
     console.log(branchName, mediaId);
-    await addDoc(collection(db, "pickupMedia"), {
-      //addDoc auto increments the document
+    await addDoc(collection(db, "deliveryMedia"), {
       BorrowedDate: dateToBorrow,
       BranchName: branchName,
       DueDate: dueDate,
       MediaID: mediaId,
       MediaName: mediaName,
+      StreetLine1: streetline1,
+      StreetLine2: streetline2,
+      City: city,
+      Country: country,
+      Postcode: postcode,
     });
-    var redirectUrl = urlString.split("/pickupConfirm")[0];
+    var redirectUrl = urlString.split("/deliveryConfirm")[0];
     redirectUrl +=
       "/stockUpdate.html?" + "MediaId=" + mediaId + "&BranchName=" + branchName;
     window.location.replace(redirectUrl);
@@ -82,7 +89,7 @@ document
     alert("You will shortly recieve an email on instuctions and details!");
   });
 
-pickupDateInput.addEventListener("change", (event) => {
+deliveryDateInput.addEventListener("change", (event) => {
   dateToBorrow = event.target.value;
   var dateToBorrowDateTime = new Date(dateToBorrow);
   var dueDateDateTime = dateToBorrowDateTime.setDate(
