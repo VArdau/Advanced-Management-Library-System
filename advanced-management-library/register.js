@@ -64,6 +64,13 @@ document.getElementById("submit").addEventListener("click", async (event) => {
     return;
   }
 
+  // to ensure they know to type in a valid dob
+  const dobRegex = /(^0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-(\d{4}$)/; // https://regex101.com/library/eP5pN3?filterFlavors=javascript&orderBy=RELEVANCE&search=date
+  if (!dobRegex.test(dob)) {
+    alert("Please enter your date of birth in the format dd/mm/yyyy.");
+    return;
+  }
+
   try {
     // creates the user in Firebase Authentication
     const userCredential = await createUserWithEmailAndPassword(
@@ -85,7 +92,7 @@ document.getElementById("submit").addEventListener("click", async (event) => {
 
     // sends email verification with link
     await sendEmailVerification(user, {
-      url: "https://amllibrary.web.app/resourcesPage.html", // sends to resources as we dont have separate homepages pages yet, but it works now
+      url: "https://amllibrary.web.app/memberHomepage.html", // sends to resources as we dont have separate homepages pages yet, but it works now
     });
 
     // clear after submiting
@@ -100,6 +107,15 @@ document.getElementById("submit").addEventListener("click", async (event) => {
     );
   } catch (error) {
     console.error("Error during registration:", error.message);
-    alert(`Error: ${error.message}`);
+
+    if (error.code === "auth/email-already-in-use") {
+      alert(
+        "This email address is already in use. Please use a different email."
+      );
+    } else if (error.code === "auth/weak-password") {
+      alert("Your password is too weak. Please use a stronger password.");
+    } else {
+      alert(`Error: ${error.message}`);
+    }
   }
 });

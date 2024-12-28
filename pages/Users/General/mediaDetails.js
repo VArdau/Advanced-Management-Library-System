@@ -269,156 +269,37 @@ document.getElementById("selected-branch").addEventListener("click", () => {
 
     pickupFormBranchNameField.value = selectedBranchName;
     deliveryFormBranchNameField.value = selectedBranchName;
+
+    submitPickupButton.disabled = false;
+    submitDeliveryButton.disabled = false;
   } else {
     console.warn("No branch selected.");
     selectedBranchBorrowLabel.textContent = "Haven't selected a branch yet";
     selectedBranchBorrowLabel.style.color = "red";
+
+    submitPickupFormButton.disabled = true;
+    submitDeliveryButton.disabled = true;
   }
 });
-const pickupForm = document.getElementById("pickupForm");
 
-// for the mediaquantity to be -1 every time
-/*const pickupButton = document.getElementById("pickup-button");
+const submitPickupButton = document.getElementById("pickup-button");
+const submitDeliveryButton = document.getElementById("delivery-button");
 
-pickupButton.addEventListener("click", () => {
-  console.log("button clicked");
-  const branchName = branchSelect.value;
-  const mediaID = selectedMediaID;
-
-  if (!branchName) {
-    alert("Please select a branch.");
-    return;
+document.getElementById("pickupForm").addEventListener("submit", (event) => {
+  const selectedBranch = pickupFormBranchNameField.value;
+  if (!selectedBranch) {
+    event.preventDefault();
+    alert("Please select a branch before submitting the form.");
   }
+});
 
-  if (!mediaID) {
-    alert("Please select a media item.");
-    return;
+document.getElementById("deliveryForm").addEventListener("submit", (event) => {
+  const selectedBranch = pickupFormBranchNameField.value;
+  if (!selectedBranch) {
+    event.preventDefault();
+    alert("Please select a branch before submitting the form.");
   }
-
-  const mediaRef = ref(database, "media");
-
-  get(mediaRef)
-    .then((snapshot) => {
-      if (snapshot.exists()) {
-        const mediaData = snapshot.val();
-
-        const mediaKey = Object.keys(mediaData).find(
-          (key) =>
-            mediaData[key].BranchName === branchName &&
-            mediaData[key].MediaID === mediaID
-        );
-
-        if (!mediaKey) {
-          alert("Media not found for the selected branch.");
-          return;
-        }
-
-        const mediaEntry = mediaData[mediaKey];
-        const currentQuantity = mediaEntry.MediaQuantity;
-
-        if (currentQuantity > 0) {
-          const newQuantity = currentQuantity - 1;
-
-          const mediaQuantityRef = ref(
-            database,
-            `media/${mediaKey}/MediaQuantity`
-          );
-          set(mediaQuantityRef, newQuantity)
-            .then(() => {
-              alert(
-                `Pickup successful! New quantity of Media ID "${mediaID}" at "${branchName}": ${newQuantity}`
-              );
-            })
-            .catch((error) => {
-              console.error("Error updating quantity:", error);
-              alert("Failed to update the stock.");
-            });
-        } else {
-          alert(
-            `Media ID "${mediaID}" is out of stock at the branch "${branchName}".`
-          );
-        }
-      } else {
-        console.error("No media data found.");
-        alert("No media data found.");
-      }
-    })
-    .catch((error) => {
-      console.error("Error accessing media data:", error);
-    });
-}); */
-
-// same as pickup, but would also need to do address
-/*const submitDeliveryButton = document.getElementById("submitDelivery");
-
-submitDeliveryButton.addEventListener("click", (event) => {
-  event.preventDefault();
-
-  const branchName = branchSelect.value;
-  const mediaID = selectedMediaID;
-
-  if (!branchName) {
-    alert("Please select a branch.");
-    return;
-  }
-
-  if (!mediaID) {
-    alert("Please select a media item.");
-    return;
-  }
-
-  const mediaRef = ref(database, "media");
-
-  get(mediaRef)
-    .then((snapshot) => {
-      if (snapshot.exists()) {
-        const mediaData = snapshot.val();
-
-        const mediaKey = Object.keys(mediaData).find(
-          (key) =>
-            mediaData[key].BranchName === branchName &&
-            mediaData[key].MediaID === mediaID
-        );
-
-        if (!mediaKey) {
-          alert("Media not found for the selected branch.");
-          return;
-        }
-
-        const mediaEntry = mediaData[mediaKey];
-        const currentQuantity = mediaEntry.MediaQuantity;
-
-        if (currentQuantity > 0) {
-          const newQuantity = currentQuantity - 1;
-
-          const mediaQuantityRef = ref(
-            database,
-            `media/${mediaKey}/MediaQuantity`
-          );
-          set(mediaQuantityRef, newQuantity)
-            .then(() => {
-              alert(
-                `Delivery successful! New quantity of Media ID "${mediaID}" at "${branchName}": ${newQuantity}`
-              );
-            })
-            .catch((error) => {
-              console.error("Error updating quantity:", error);
-              alert("Failed to update the stock.");
-            });
-        } else {
-          alert(
-            `Media ID "${mediaID}" is out of stock at the branch "${branchName}".`
-          );
-        }
-      } else {
-        console.error("No media data found.");
-        alert("No media data found.");
-      }
-    })
-    .catch((error) => {
-      console.error("Error accessing media data:", error);
-    });
-});*/
+});
 
 // initialize the app
 loadCities();

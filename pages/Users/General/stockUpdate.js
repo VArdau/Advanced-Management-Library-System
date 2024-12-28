@@ -55,7 +55,7 @@ get(mediaRef)
         set(mediaQuantityRef, newQuantity)
           .then(() => {
             alert(
-              `Pickup successful! New quantity of Media ID "${mediaId}" at "${branchName}": ${newQuantity}`
+              `Successful! New quantity of Media ID "${mediaId}" at "${branchName}": ${newQuantity}`
             );
             var redirectUrl = urlString.split("/stockUpdate")[0];
             redirectUrl += "/viewMediaDetailsPage.html?" + "MediaId=" + mediaId;

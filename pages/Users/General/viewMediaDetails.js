@@ -1,4 +1,4 @@
-// // couldnt have in the same file with the config so this is for the forms and extra
+// couldnt have in the same file with the config so this is for the forms and extra
 
 function popupSearch() {
   document.getElementById("overlay").style.display = "block";
@@ -34,16 +34,4 @@ document.getElementById("read-more").addEventListener("click", function () {
     description.style.maxHeight = "none";
     button.innerText = "Read less";
   }
-});
-
-// for the pickup/delivery
-//this is to just click it off
-document.getElementById("pickup-button").addEventListener("click", () => {
-  const deliveryAddress = document.getElementById("deliveryAddress");
-  deliveryAddress.style.display = "none";
-});
-
-document.getElementById("delivery-button").addEventListener("click", () => {
-  const deliveryAddress = document.getElementById("deliveryAddress");
-  deliveryAddress.style.display = "block";
 });
