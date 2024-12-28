@@ -65,7 +65,7 @@ document.getElementById("submit").addEventListener("click", async (event) => {
   }
 
   // to ensure they know to type in a valid dob
-  const dobRegex = /(^0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-(\d{4}$)/; // https://regex101.com/library/eP5pN3?filterFlavors=javascript&orderBy=RELEVANCE&search=date
+  const dobRegex = /^\d{2}\/\d{2}\/\d{4}$/;
   if (!dobRegex.test(dob)) {
     alert("Please enter your date of birth in the format dd/mm/yyyy.");
     return;
