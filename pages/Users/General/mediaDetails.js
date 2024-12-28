@@ -277,7 +277,7 @@ document.getElementById("selected-branch").addEventListener("click", () => {
     selectedBranchBorrowLabel.textContent = "Haven't selected a branch yet";
     selectedBranchBorrowLabel.style.color = "red";
 
-    submitPickupFormButton.disabled = true;
+    submitPickupButton.disabled = true;
     submitDeliveryButton.disabled = true;
   }
 });
