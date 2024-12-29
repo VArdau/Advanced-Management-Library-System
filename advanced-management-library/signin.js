@@ -1,16 +1,18 @@
-// JavaScript to toggle password visibility
 const passwordInput = document.getElementById("password");
 const togglePassword = document.getElementById("togglePassword");
 
 togglePassword.addEventListener("click", function () {
-  // Toggle the type attribute between "password" (hidden) and "text" (visible)
   const type =
     passwordInput.getAttribute("type") === "password" ? "text" : "password";
   passwordInput.setAttribute("type", type);
 
-  // Toggle the eye icon to reflect visibility state
-  this.classList.toggle("fa-eye");
-  this.classList.toggle("fa-eye-slash");
+  if (type === "password") {
+    this.classList.remove("fa-eye");
+    this.classList.add("fa-eye-slash");
+  } else {
+    this.classList.remove("fa-eye-slash");
+    this.classList.add("fa-eye");
+  }
 });
 
 // sign in logic
@@ -22,7 +24,7 @@ import {
   signInWithEmailAndPassword,
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 
-// Your web app's Firebase configuration
+// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCmcT5fG8Nkny7jlFEN9gn3rRZHxyII_as",
   authDomain: "amllibrary.firebaseapp.com",
@@ -58,10 +60,8 @@ login.addEventListener("click", function (event) {
 
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      // Signed in
       const user = userCredential.user;
       window.location.href = "wishlistPage.html";
-      // ...
     })
     .catch((error) => {
       const errorCode = error.code;
