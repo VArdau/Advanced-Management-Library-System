@@ -3,7 +3,6 @@ import {
   getDatabase,
   ref,
   get,
-  set,
 } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
 
 // Firebase configuration
@@ -69,7 +68,7 @@ function initializeMediaValues() {
         var mediaArray = snapshot.val();
         if (mediaArray && mediaArray.length > 0) {
           if (!mediaId) {
-            firstMedia = mediaArray[2];
+            firstMedia = mediaArray[0];
           } else {
             var mediaIdToInt = Number(mediaId);
             firstMedia = mediaArray[mediaIdToInt - 1]; //media id is 3 but the index is 2, the index starts from zero, but the media ids start from 1
@@ -130,7 +129,7 @@ function loadCities() {
 }
 
 function searchByCity() {
-  const cityName = cityInput.value.trim().toLowerCase(); // Convert input to lowercase
+  const cityName = cityInput.value.trim().toLowerCase();
   librariesInfo.innerHTML = "";
 
   if (!cityName) {
@@ -147,7 +146,7 @@ function searchByCity() {
         const filteredMedia = mediaArray.filter(
           (media) =>
             media &&
-            media.BranchCity.toLowerCase() === cityName && // Convert database value to lowercase
+            media.BranchCity.toLowerCase() === cityName &&
             media.MediaName === selectedMediaName
         );
 
@@ -202,7 +201,7 @@ function loadBranches(cityName) {
         const filteredBranches = mediaArray.filter(
           (media) =>
             media &&
-            media.BranchCity.toLowerCase() === cityName.toLowerCase() && // Convert both values to lowercase
+            media.BranchCity.toLowerCase() === cityName.toLowerCase() &&
             media.MediaName === selectedMediaName &&
             media.MediaQuantity > 0
         );
@@ -236,7 +235,7 @@ function loadBranches(cityName) {
 document.getElementById("search-button").addEventListener("click", () => {
   const cityName = cityInput.value.trim();
   if (cityName) {
-    loadBranches(cityName.toLowerCase()); // Pass lowercase city name
+    loadBranches(cityName.toLowerCase());
   } else {
     console.warn("Please enter a city name to search for branches.");
   }
@@ -289,7 +288,7 @@ document.getElementById("pickupForm").addEventListener("submit", (event) => {
   const selectedBranch = pickupFormBranchNameField.value;
   if (!selectedBranch) {
     event.preventDefault();
-    alert("Please select a branch before submitting the form.");
+    alert("Please select a branch before continuing.");
   }
 });
 

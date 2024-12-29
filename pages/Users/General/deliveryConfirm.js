@@ -53,9 +53,16 @@ var dateToBorrowDateTime = new Date(dateToBorrow);
 var dueDateDateTime = dateToBorrowDateTime.setDate(
   dateToBorrowDateTime.getDate() + 14
 );
+
 var dueDate = new Date(dueDateDateTime).toISOString().split("T")[0];
 const dueDateElement = document.getElementById("dueDate");
-dueDateElement.innerHTML = dueDate;
+dueDateElement.innerHTML = formatDateToDDMMYYYY(dueDate);
+
+// to show in this format to make sure its consistant
+function formatDateToDDMMYYYY(dateString) {
+  const dateParts = dateString.split("-");
+  return `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
+}
 
 document
   .getElementById("deliveryForm")
@@ -67,6 +74,22 @@ document
     var city = event.target.elements[3].value;
     var country = event.target.elements[4].value;
     var postcode = event.target.elements[5].value;
+
+    // to not let them submit if empty address
+    let missingFields = [];
+    if (!streetline1) missingFields.push("Street Line 1");
+    if (!city) missingFields.push("City");
+    if (!country) missingFields.push("Country");
+    if (!postcode) missingFields.push("Postcode");
+
+    if (missingFields.length > 0) {
+      alert(
+        `Please fill in the following required fields: ${missingFields.join(
+          ", "
+        )}`
+      );
+      return;
+    }
 
     console.log(branchName, mediaId);
     await addDoc(collection(db, "deliveryMedia"), {
@@ -96,5 +119,5 @@ deliveryDateInput.addEventListener("change", (event) => {
     dateToBorrowDateTime.getDate() + 14
   );
   dueDate = new Date(dueDateDateTime).toISOString().split("T")[0];
-  document.getElementById("dueDate").innerText = dueDate;
+  document.getElementById("dueDate").innerText = formatDateToDDMMYYYY(dueDate);
 });

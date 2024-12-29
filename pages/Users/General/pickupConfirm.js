@@ -1,8 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
 import {
   getFirestore,
-  //doc,
-  //setDoc,
   collection,
   addDoc,
 } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
@@ -57,9 +55,15 @@ var dateToBorrowDateTime = new Date(dateToBorrow);
 var dueDateDateTime = dateToBorrowDateTime.setDate(
   dateToBorrowDateTime.getDate() + 14
 );
+
 var dueDate = new Date(dueDateDateTime).toISOString().split("T")[0];
 const dueDateElement = document.getElementById("dueDate");
-dueDateElement.innerHTML = dueDate;
+dueDateElement.innerHTML = formatDateToDDMMYYYY(dueDate);
+
+function formatDateToDDMMYYYY(dateString) {
+  const dateParts = dateString.split("-");
+  return `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
+}
 
 document
   .getElementById("submitPickup")
@@ -89,5 +93,5 @@ pickupDateInput.addEventListener("change", (event) => {
     dateToBorrowDateTime.getDate() + 14
   );
   dueDate = new Date(dueDateDateTime).toISOString().split("T")[0];
-  document.getElementById("dueDate").innerText = dueDate;
+  document.getElementById("dueDate").innerText = formatDateToDDMMYYYY(dueDate);
 });

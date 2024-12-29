@@ -13,10 +13,7 @@
   </head>
   <body>
     <div class="details-head">
-      <!--will need name of the media here -->
       <h1 id="media-name">Loading...</h1>
-      <!--need a faster way of doing this-->
-      <!--trolley, to have multiple borrowed media-->
       <i class="fa-solid fa-cart-shopping" id="trolley"></i>
     </div>
     <div class="main-content">
@@ -79,9 +76,7 @@
           placeholder="Town of library"
           list="towns-list"
         />
-        <datalist id="towns-list">
-          <!--figure out how to get all the branch towns into here using js-->
-        </datalist>
+        <datalist id="towns-list"> </datalist>
         <button type="button" id="search-button" onclick="popupSearch()">
           Search
         </button>
@@ -94,7 +89,6 @@
           </div>
           <div id="libraries-info" id="availability"></div>
           <div class="close-button-container">
-            <!--did this to center, perhaps theres a better way-->
             <button id="selected-branch">Select</button>
             <button id="close-button" onclick="closeSearch()">Close</button>
           </div>
@@ -113,11 +107,9 @@
           ></label>
         </div>
         <div class="button-row">
-          <!--borrow function thing-->
           <button type="button" id="borrow-button" onclick="popupBorrow()">
             Borrow
           </button>
-          <!--wont implement for now-->
           <button type="button">Reserve</button>
         </div>
         <div id="overlayBorrow"></div>
@@ -169,7 +161,7 @@
                   hidden="true"
                 />
 
-                <button type="submit" id="pickup-button">Pick up</button>
+                <button type="submit" id="pickup-button">Pickup</button>
               </form>
               <form id="deliveryForm" action="deliveryConfirm.html">
                 <input
@@ -214,6 +206,5 @@
     </div>
     <script src="viewMediaDetails.js"></script>
     <script type="module" src="mediaDetails.js"></script>
-    <!--wont work-->>
   </body>
 </html>
