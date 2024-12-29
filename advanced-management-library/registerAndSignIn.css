@@ -1,4 +1,3 @@
-/*can do body separetly to not connect to another css file*/
 body {
   background-image: url("/images/libraryBackground.jpg");
   font-family: Arial, Helvetica, sans-serif;
@@ -6,7 +5,6 @@ body {
 
 body,
 html {
-  /*height: 100%; */
   margin: 0;
   display: flex;
   align-items: center;
@@ -14,17 +12,15 @@ html {
 }
 
 .formBox {
-  /*padding: 50%;*/
-  margin-top: 20%; /*50px*/
-  margin-bottom: 20%; /*the margin stuff spaces*/
-  padding-left: 30%; /*25%*/
-  padding-right: 30%; /*25*/
+  margin-top: 20%;
+  margin-bottom: 20%;
+  padding-left: 30%;
+  padding-right: 30%;
   padding-bottom: 50px;
   border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #f9f9f9;
-  /*width: 100%;*/
 }
 
 .formBox h1 {
@@ -39,7 +35,7 @@ button {
 }
 
 .formsInputs input {
-  width: 300px; /*100% this and line 27 (width 100% makes the button in center)*/
+  width: 300px;
   height: 18px;
   padding-bottom: 10px;
   background-color: #d3d3d3;
@@ -51,7 +47,8 @@ button {
   width: 300px;
   margin-top: 20px;
   font-size: 16px;
-  background-color: #e8d5ac;
+  color: white;
+  background-color: #002a60;
   cursor: pointer;
 }
 
@@ -65,16 +62,13 @@ input {
   border: none;
 }
 
-/*at first had it as p but if h6 then can have a class and more consistent/less repetition*/
 .links {
   color: #0000ff;
   text-decoration: underline;
   cursor: pointer;
-  /*padding-top: 10px;*/
   text-align: center;
 }
 
-/*to make sure the link looks not as bold*/
 h6 {
   font-weight: normal;
   text-align: center;
@@ -85,7 +79,7 @@ h5 {
   color: black;
 }
 
-/*this stuff is just for dob and gender*/
+/*for gender and dob*/
 .flex-container {
   display: flex;
   gap: 20px;
@@ -112,7 +106,6 @@ h5 {
     width: 90%;
     padding-right: 10px;
   }
-  /*to make the gender one inline??*/
   .flex-container input {
     width: 130px;
   }
