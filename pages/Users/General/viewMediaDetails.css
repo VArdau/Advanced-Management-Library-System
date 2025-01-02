@@ -292,3 +292,29 @@ h3 {
   padding-bottom: 15px;
   padding-right: 15px;
 }
+
+/*responsivness*/
+@media screen and (max-width: 746px) {
+  body {
+    margin: auto;
+    padding-right: 20px;
+  }
+
+  h1 {
+    font-size: 2.7em;
+  }
+
+  .main-content {
+    flex-direction: column;
+  }
+
+  .button-group {
+    order: 0;
+    padding-bottom: 20px;
+    padding-top: 10px;
+  }
+
+  .content-container {
+    order: 1;
+  }
+}
