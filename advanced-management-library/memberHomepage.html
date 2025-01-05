@@ -28,7 +28,7 @@
                   rgba(0, 0, 0, 0.5),
                   rgba(0, 0, 0, 0.7)
                 ),
-                url('/images/libraryBooks.jpg');
+                url('images/libraryBooks.jpg');
             "
           >
             <p style="color: aliceblue">Books</p>
@@ -42,7 +42,7 @@
                   rgba(0, 0, 0, 0.5),
                   rgba(0, 0, 0, 0.7)
                 ),
-                url('/images/libraryDvds2.jpg');
+                url('images/libraryDvds2.jpg');
             "
           >
             <p style="color: aliceblue">DVDs</p>
@@ -56,7 +56,7 @@
                   rgba(0, 0, 0, 0.5),
                   rgba(0, 0, 0, 0.7)
                 ),
-                url('/images/libraryCds.jpg');
+                url('images/libraryCds.jpg');
             "
           >
             <p style="color: aliceblue">CDs</p>
@@ -70,7 +70,7 @@
                   rgba(0, 0, 0, 0.5),
                   rgba(0, 0, 0, 0.7)
                 ),
-                url('/images/libraryGames.jpg');
+                url('images/libraryGames.jpg');
             "
           >
             <p style="color: aliceblue">Games</p>
@@ -84,7 +84,7 @@
                   rgba(0, 0, 0, 0.5),
                   rgba(0, 0, 0, 0.7)
                 ),
-                url('/images/libraryPeriodicals.jpg');
+                url('images/libraryPeriodicals.jpg');
             "
           >
             <p style="color: aliceblue">Periodicals</p>
@@ -110,12 +110,10 @@
     <script>
       const list = document.querySelector(".list");
 
-      // We want to know the width of one of the items. We'll use this to decide how many pixels we want our carousel to scroll.
       const item = document.querySelector(".item");
       const itemWidth = item.offsetWidth;
 
       function handleClick(direction) {
-        // Based on the direction we call `scrollBy` with the item width we got earlier
         if (direction === "previous") {
           list.scrollBy({ left: -itemWidth, behavior: "smooth" });
         } else {

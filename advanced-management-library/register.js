@@ -1,3 +1,4 @@
+// to toggle the password visibility
 const passwordInput = document.getElementById("password");
 const togglePassword = document.getElementById("togglePassword");
 
@@ -21,8 +22,7 @@ togglePassword.addEventListener("click", function () {
 // https://firebase.google.com/docs/firestore/security/get-started
 // https://firebase.google.com/docs/cli#sign-in-test-cli
 
-// also index will be guestHomepage but for now wont touch it
-// moved it to hosting to not have it as local and be able open the email link on another computer
+// firebase configurations for authetication and firestore
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import {
   getAuth,
@@ -66,7 +66,7 @@ document.getElementById("submit").addEventListener("click", async (event) => {
     return;
   }
 
-  // to ensure they know to type in a valid dob
+  // to ensure they know to type in a valid dob, and to handle the error if they put in anything other then this
   const dobRegex = /^\d{2}\/\d{2}\/\d{4}$/;
   if (!dobRegex.test(dob)) {
     alert("Please enter your date of birth in the format dd/mm/yyyy.");
@@ -110,11 +110,14 @@ document.getElementById("submit").addEventListener("click", async (event) => {
   } catch (error) {
     console.error("Error during registration:", error.message);
 
+    // if email is repeated
     if (error.code === "auth/email-already-in-use") {
       alert(
         "This email address is already in use. Please use a different email."
       );
-    } else if (error.code === "auth/weak-password") {
+    }
+    // if password is too weak
+    else if (error.code === "auth/weak-password") {
       alert("Your password is too weak. Please use a stronger password.");
     } else {
       alert(`Error: ${error.message}`);

@@ -11,6 +11,7 @@ html {
   justify-content: center;
 }
 
+/*the form*/
 .formBox {
   margin-top: 20%;
   margin-bottom: 20%;
@@ -54,6 +55,7 @@ button {
 
 .formBox button:hover {
   background-color: #bf996b;
+  color: black;
 }
 
 .formsInputs button,
@@ -96,6 +98,7 @@ h5 {
   align-items: center;
 }
 
+/*to make it responsive*/
 @media (max-width: 480px) {
   .formBox {
     padding-left: 10px;

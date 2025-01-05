@@ -21,6 +21,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+// the url is used to get the details from realtime
 const urlString = window.location.href;
 const url = new URL(urlString);
 const mediaId = url.searchParams.get("mediaId");
@@ -36,12 +37,14 @@ const ad = document.getElementById("branchName");
 
 settingValues();
 
+// making the values visible in the page
 function settingValues() {
   mn.innerHTML = mediaName;
   bn.innerHTML = branchName;
   ad.innerHTML = branchName;
 }
 
+// the date and when its due
 const deliveryDateInput = document.getElementById("delivery-date");
 const today = new Date();
 const formattedDate = today.toISOString().split("T")[0];
@@ -91,6 +94,7 @@ document
       return;
     }
 
+    // adding the details into the firestore without accessing realtime due to the url used previously
     console.log(branchName, mediaId);
     await addDoc(collection(db, "deliveryMedia"), {
       BorrowedDate: dateToBorrow,
@@ -104,6 +108,7 @@ document
       Country: country,
       Postcode: postcode,
     });
+    // takes them back to the stock update briefly to update the value in realtime
     var redirectUrl = urlString.split("/deliveryConfirm")[0];
     redirectUrl +=
       "/stockUpdate.html?" + "MediaId=" + mediaId + "&BranchName=" + branchName;
@@ -112,6 +117,7 @@ document
     alert("You will shortly recieve an email on instuctions and details!");
   });
 
+// for the new date to be set once they change the date
 deliveryDateInput.addEventListener("change", (event) => {
   dateToBorrow = event.target.value;
   var dateToBorrowDateTime = new Date(dateToBorrow);
