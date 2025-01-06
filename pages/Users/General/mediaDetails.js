@@ -27,8 +27,6 @@ let selectedMediaID = null;
 let selectedMediaName = null;
 let selectedBranchName = null;
 
-//export { selectedMediaID, selectedBranchName };
-
 const librariesInfo = document.getElementById("libraries-info");
 const cityInput = document.getElementById("availability-two");
 const townsList = document.getElementById("towns-list");

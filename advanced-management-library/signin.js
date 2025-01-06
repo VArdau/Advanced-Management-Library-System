@@ -61,7 +61,7 @@ login.addEventListener("click", function (event) {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
-      window.location.href = "wishlistPage.html";
+      window.location.href = "memberHomepage.html";
     })
     .catch((error) => {
       const errorCode = error.code;
